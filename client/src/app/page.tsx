@@ -1,0 +1,560 @@
+ "use client"
+ import React, { useEffect, useState } from 'react';
+import { Youtube, Instagram, Music, ExternalLink } from 'lucide-react';
+
+const RootCubeLandingPage: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const platforms = [
+    {
+      name: 'YouTube',
+      icon: <Youtube className="w-8 h-8" />,
+      description: 'Promote your videos and grow your channel',
+      color: 'from-red-500 to-red-600',
+      bgColor: 'bg-red-50',
+      textColor: 'text-red-600'
+    },
+    {
+      name: 'Instagram',
+      icon: <Instagram className="w-8 h-8" />,
+      description: 'Boost your posts, stories, and reels',
+      color: 'from-pink-500 via-purple-500 to-indigo-500',
+      bgColor: 'bg-gradient-to-br from-pink-50 to-purple-50',
+      textColor: 'text-purple-600'
+    },
+    {
+      name: 'TikTok',
+      icon: <Music className="w-8 h-8" />,
+      description: 'Amplify your short-form video content',
+      color: 'from-black to-gray-800',
+      bgColor: 'bg-gray-50',
+      textColor: 'text-gray-800'
+    }
+  ];
+
+  useEffect(() => {
+    setIsVisible(true);
+    
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="bg-gray-900 text-white overflow-x-hidden">
+      <style jsx>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        .gradient-bg {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+          backdrop-filter: blur(10px);
+          background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-pulse-slow {
+          animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        .text-gradient {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        .card-hover {
+          transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .animate-on-scroll {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.6s ease;
+        }
+        
+        .animate-in {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `}</style>
+
+      {/* Hero Section */}
+<div className="relative min-h-screen overflow-hidden">
+  {/* Background Image with Overlay */}
+  <div 
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style={{
+      backgroundImage: 'url(https://buse.de/wp-content/uploads/2025/01/sind-influencer-handelsvertreter.webp)'
+    }}
+  >
+    {/* Dark overlay for better text readability */}
+    <div className="absolute inset-0 bg-black/50"></div>
+    {/* Gradient overlay to blend with your existing design */}
+    <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/60 via-purple-900/40 to-pink-900/60"></div>
+  </div>
+
+  {/* Navigation */}
+  <nav className="relative z-50 px-6 py-4">
+    <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="flex items-center space-x-3">
+        <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+          <span className="text-indigo-600 font-bold text-xl">R</span>
+        </div>
+        <span className="text-2xl font-bold text-white">RootCubeMedia</span>
+      </div>
+      <div className="hidden md:flex space-x-8">
+        <button 
+          onClick={() => scrollToSection('features')}
+          className="text-white hover:text-amber-400 transition-colors"
+        >
+          Features
+        </button>
+        <button 
+          onClick={() => scrollToSection('how-it-works')}
+          className="text-white hover:text-amber-400 transition-colors"
+        >
+          How It Works
+        </button>
+        <button 
+          onClick={() => scrollToSection('tech-stack')}
+          className="text-white hover:text-amber-400 transition-colors"
+        >
+          Tech
+        </button>
+      </div>
+      <div className="flex space-x-4">
+        <button className="px-6 py-2 rounded-full border border-white/30 hover:bg-white/10 transition-all text-white">
+          Login
+        </button>
+        <button className="px-6 py-2 bg-amber-500 rounded-full hover:bg-amber-400 transition-all font-semibold text-black">
+          Get Started
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  {/* Hero Content */}
+  <div className="relative z-40 max-w-7xl mx-auto px-6 pt-20 pb-32">
+    <div className="text-center">
+      <h1 className={`text-6xl md:text-8xl font-bold mb-8 text-white transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        Where <span className="text-amber-400">Creators</span><br />
+        Meet <span className="text-pink-400">Audiences</span>
+      </h1>
+      <p className={`text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-white/90 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        The revolutionary platform connecting content creators with engaged viewers. 
+        Promote your videos, earn rewards, and build authentic communities.
+      </p>
+      <div className={`flex flex-col md:flex-row gap-6 justify-center items-center transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <button className="px-8 py-4 bg-pink-500 rounded-full text-xl font-semibold hover:bg-pink-400 transition-all transform hover:scale-105 text-white">
+          Start Creating
+        </button>
+        <button className="px-8 py-4 bg-white/20 backdrop-blur-sm rounded-full text-xl font-semibold hover:bg-white/30 transition-all text-white border border-white/20">
+          Start Watching & Earning
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* Enhanced Floating Elements */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none z-30">
+    <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl animate-float"></div>
+    <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-pink-400/10 rounded-full blur-3xl animate-float" style={{animationDelay: '-3s'}}></div>
+    <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-indigo-400/15 rounded-full blur-2xl animate-float" style={{animationDelay: '-1.5s'}}></div>
+  </div>
+</div>
+
+      {/* User Types Section */}
+      <section id="features" className="py-32 bg-gray-900 relative">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-5xl font-bold text-center mb-20 text-gradient animate-on-scroll">
+            Choose Your Path
+          </h2>
+          <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+            {/* Artists/Creators */}
+            <div className="card-hover bg-gradient-to-br from-pink-500/20 to-indigo-500/20 p-8 rounded-3xl glass-effect border border-white/10 animate-on-scroll">
+              <div className="text-6xl mb-6 text-center">🎨</div>
+              <h3 className="text-3xl font-bold mb-6 text-center text-pink-400">Artists & Creators</h3>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start space-x-3">
+                  <span className="w-2 h-2 bg-pink-400 rounded-full mt-3 flex-shrink-0"></span>
+                  <span>Promote your short videos (≤30s) to real audiences</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="w-2 h-2 bg-pink-400 rounded-full mt-3 flex-shrink-0"></span>
+                  <span>Advanced analytics & engagement tracking</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="w-2 h-2 bg-pink-400 rounded-full mt-3 flex-shrink-0"></span>
+                  <span>Target specific audiences & categories</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="w-2 h-2 bg-pink-400 rounded-full mt-3 flex-shrink-0"></span>
+                  <span>Pay per campaign with mobile money</span>
+                </li>
+              </ul>
+              <button className="w-full py-3 bg-pink-500 rounded-2xl font-semibold hover:bg-pink-400 transition-all">
+                Start Promoting
+              </button>
+            </div>
+
+            {/* Promoters */}
+            <div className="card-hover bg-gradient-to-br from-amber-500/20 to-pink-500/20 p-8 rounded-3xl glass-effect border border-white/10 animate-on-scroll">
+              <div className="text-6xl mb-6 text-center">📢</div>
+              <h3 className="text-3xl font-bold mb-6 text-center text-amber-400">Verified Promoters</h3>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start space-x-3">
+                  <span className="w-2 h-2 bg-amber-400 rounded-full mt-3 flex-shrink-0"></span>
+                  <span>Apply for promoter status with social media verification</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="w-2 h-2 bg-amber-400 rounded-full mt-3 flex-shrink-0"></span>
+                  <span>Get verified after social media review</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="w-2 h-2 bg-amber-400 rounded-full mt-3 flex-shrink-0"></span>
+                  <span>Access to premium promotion tools</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="w-2 h-2 bg-amber-400 rounded-full mt-3 flex-shrink-0"></span>
+                  <span>Enhanced reach & targeting options</span>
+                </li>
+              </ul>
+              <button className="w-full py-3 bg-amber-500 rounded-2xl font-semibold hover:bg-amber-400 transition-all text-black">
+                Apply for Verification
+              </button>
+            </div>
+
+            {/* Viewers */}
+            <div className="card-hover bg-gradient-to-br from-indigo-500/20 to-amber-500/20 p-8 rounded-3xl glass-effect border border-white/10 animate-on-scroll">
+              <div className="text-6xl mb-6 text-center">👀</div>
+              <h3 className="text-3xl font-bold mb-6 text-center text-indigo-400">Viewers & Earners</h3>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start space-x-3">
+                  <span className="w-2 h-2 bg-indigo-400 rounded-full mt-3 flex-shrink-0"></span>
+                  <span>Watch engaging short videos (30s max)</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="w-2 h-2 bg-indigo-400 rounded-full mt-3 flex-shrink-0"></span>
+                  <span>Earn rewards for every view & engagement</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="w-2 h-2 bg-indigo-400 rounded-full mt-3 flex-shrink-0"></span>
+                  <span>Withdraw up to 300,000 RWF monthly</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <span className="w-2 h-2 bg-indigo-400 rounded-full mt-3 flex-shrink-0"></span>
+                  <span>Discover new content & creators</span>
+                </li>
+              </ul>
+              <button className="w-full py-3 bg-indigo-500 rounded-2xl font-semibold hover:bg-indigo-400 transition-all">
+                Start Earning
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section id="how-it-works" className="py-32 bg-gradient-to-br from-gray-800 to-gray-900">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-5xl font-bold text-center mb-20 text-gradient animate-on-scroll">
+            How It Works
+          </h2>
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="space-y-12 animate-on-scroll">
+              <div className="flex items-start space-x-6">
+                <div className="w-16 h-16 bg-pink-500 rounded-2xl flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                  1
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold mb-3 text-pink-400">Creators Upload & Pay</h3>
+                  <p className="text-gray-300">
+                    Artists upload their short videos and set up promotion campaigns with targeted audiences. 
+                    Payment is simple with mobile money integration.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-6">
+                <div className="w-16 h-16 bg-amber-500 rounded-2xl flex items-center justify-center text-2xl font-bold flex-shrink-0 text-black">
+                  2
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold mb-3 text-amber-400">Verification Process</h3>
+                  <p className="text-gray-300">
+                    Promoters apply for verification through social media review, ensuring quality and 
+                    authenticity across the platform.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-6">
+                <div className="w-16 h-16 bg-indigo-500 rounded-2xl flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                  3
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold mb-3 text-indigo-400">Viewers Watch & Earn</h3>
+                  <p className="text-gray-300">
+                    Real users watch promoted content, engage authentically, and earn rewards that can be 
+                    withdrawn monthly up to 300,000 RWF.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="relative animate-on-scroll">
+              <div className="w-full h-96 bg-gradient-to-br from-indigo-500/20 to-pink-500/20 rounded-3xl glass-effect flex items-center justify-center">
+                <div className="text-8xl animate-pulse-slow">📱</div>
+              </div>
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-amber-500 rounded-full flex items-center justify-center animate-float">
+                <span className="text-2xl">💰</span>
+              </div>
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-pink-500/30 rounded-full flex items-center justify-center animate-float" style={{animationDelay: '-2s'}}>
+                <span className="text-3xl">🎬</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-32 bg-gradient-to-br from-gray-800 to-gray-900">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-5xl font-bold mb-20 text-gradient animate-on-scroll">
+            Platform Impact
+          </h2>
+          
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="p-8 animate-on-scroll">
+              <div className="text-5xl font-bold text-pink-400 mb-4">10K+</div>
+              <div className="text-xl text-gray-300">Active Creators</div>
+            </div>
+            <div className="p-8 animate-on-scroll">
+              <div className="text-5xl font-bold text-amber-400 mb-4">50K+</div>
+              <div className="text-xl text-gray-300">Video Views Daily</div>
+            </div>
+            <div className="p-8 animate-on-scroll">
+              <div className="text-5xl font-bold text-indigo-400 mb-4">25K+</div>
+              <div className="text-xl text-gray-300">Earning Viewers</div>
+            </div>
+            <div className="p-8 animate-on-scroll">
+              <div className="text-5xl font-bold text-white mb-4">500+</div>
+              <div className="text-xl text-gray-300">Verified Promoters</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* supported platforms */}
+      <section className="py-32 bg-gradient-to-br from-gray-800 to-gray-900">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className=".">
+            Promote Your Content
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Amplify your reach across all major social platforms. Upload, optimize, and promote your content with our integrated promotion tools.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {platforms.map((platform, index) => (
+            <div
+              key={platform.name}
+              className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br ${platform.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
+              
+              <div className="relative p-8">
+                <div className={`inline-flex items-center justify-center w-16 h-16 ${platform.bgColor} rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={platform.textColor}>
+                    {platform.icon}
+                  </div>
+                </div>
+                
+                <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                  {platform.name}
+                </h3>
+                
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  {platform.description}
+                </p>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-green-600 font-medium">Active Promotion</span>
+                  </div>
+                  
+                  <button className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium group-hover:translate-x-1 transition-all duration-300">
+                    <span>Promote</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+              
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <div className="inline-flex items-center space-x-4 bg-white rounded-full px-8 py-4 shadow-lg">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium text-gray-700">
+                Cross-platform promotion tools integrated
+              </span>
+            </div>
+            <div className="w-px h-6 bg-gray-200"></div>
+            <span className="text-sm text-gray-500">
+              Upload once, promote everywhere
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      {/* Tech Stack */}
+      <section id="tech-stack" className="py-32 bg-gradient-to-br from-gray-800 to-gray-900">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-5xl font-bold text-center mb-20 text-gradient animate-on-scroll">
+            Built with Modern Tech
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="card-hover p-8 bg-white/5 rounded-3xl glass-effect border border-white/10 text-center animate-on-scroll">
+              <div className="text-5xl mb-6">⚡</div>
+              <h3 className="text-xl font-bold mb-3">Next.js Frontend</h3>
+              <p className="text-gray-400">TypeScript/TSX for robust, scalable user interfaces</p>
+            </div>
+            <div className="card-hover p-8 bg-white/5 rounded-3xl glass-effect border border-white/10 text-center animate-on-scroll">
+              <div className="text-5xl mb-6">🚀</div>
+              <h3 className="text-xl font-bold mb-3">Node.js API</h3>
+              <p className="text-gray-400">Express backend for fast, reliable performance</p>
+            </div>
+            <div className="card-hover p-8 bg-white/5 rounded-3xl glass-effect border border-white/10 text-center animate-on-scroll">
+              <div className="text-5xl mb-6">🗄️</div>
+              <h3 className="text-xl font-bold mb-3">MySQL Database</h3>
+              <p className="text-gray-400">Relational database for secure data management</p>
+            </div>
+            <div className="card-hover p-8 bg-white/5 rounded-3xl glass-effect border border-white/10 text-center animate-on-scroll">
+              <div className="text-5xl mb-6">🐳</div>
+              <h3 className="text-xl font-bold mb-3">Docker Deploy</h3>
+              <p className="text-gray-400">Containerized services for seamless scaling</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32 gradient-bg relative overflow-hidden">
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-40">
+          <h2 className="text-6xl font-bold mb-8 animate-on-scroll">Ready to Get Started?</h2>
+          <p className="text-2xl mb-12 text-white/80 animate-on-scroll">
+            Join thousands of creators and viewers building the future of content promotion
+          </p>
+          <div className="flex flex-col md:flex-row gap-6 justify-center animate-on-scroll">
+            <button className="px-12 py-4 bg-pink-500 rounded-full text-xl font-semibold hover:bg-pink-400 transition-all transform hover:scale-105">
+              Create Account
+            </button>
+            <button className="px-12 py-4 bg-white/10 glass-effect rounded-full text-xl font-semibold hover:bg-white/20 transition-all">
+              Learn More
+            </button>
+          </div>
+        </div>
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" style={{animationDelay: '-4s'}}></div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 py-16 border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-10 h-10 bg-indigo-500 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">R</span>
+                </div>
+                <span className="text-2xl font-bold">RootCubeMedia</span>
+              </div>
+              <p className="text-gray-400">
+                Connecting creators with audiences through authentic engagement and fair rewards.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Platform</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><button className="hover:text-white transition-colors">For Creators</button></li>
+                <li><button className="hover:text-white transition-colors">For Viewers</button></li>
+                <li><button className="hover:text-white transition-colors">Promoter Verification</button></li>
+                <li><button className="hover:text-white transition-colors">Analytics</button></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><button className="hover:text-white transition-colors">Help Center</button></li>
+                <li><button className="hover:text-white transition-colors">Payment Info</button></li>
+                <li><button className="hover:text-white transition-colors">Contact Us</button></li>
+                <li><button className="hover:text-white transition-colors">API Docs</button></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Legal</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><button className="hover:text-white transition-colors">Privacy Policy</button></li>
+                <li><button className="hover:text-white transition-colors">Terms of Service</button></li>
+                <li><button className="hover:text-white transition-colors">Community Guidelines</button></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-white/10 mt-12 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 RootCubeMedia. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default RootCubeLandingPage;
