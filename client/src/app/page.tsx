@@ -175,32 +175,61 @@ const RootCubeLandingPage: React.FC = () => {
   </nav>
 
   {/* Hero Content */}
-  <div className="relative z-40 max-w-7xl mx-auto px-6 pt-20 pb-32">
-    <div className="text-center">
-      <h1 className={`text-6xl md:text-8xl font-bold mb-8 text-white transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        Where <span className="text-amber-400">Creators</span><br />
-        Meet <span className="text-pink-400">Audiences</span>
+  <div className="relative z-40 flex items-center justify-center min-h-screen px-6">
+    <div className="text-center max-w-6xl mx-auto">
+      {/* Main Heading */}
+      <h1 className={`text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 text-white leading-tight transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        Where <span className="text-amber-400 drop-shadow-lg">Creators</span><br />
+        Meet <span className="text-pink-400 drop-shadow-lg">Audiences</span>
       </h1>
-      <p className={`text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-white/90 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        The revolutionary platform connecting content creators with engaged viewers. 
-        Promote your videos, earn rewards, and build authentic communities.
+      
+      {/* Subtitle */}
+      <p className={`text-lg md:text-xl lg:text-2xl mb-8 max-w-4xl mx-auto text-white/95 leading-relaxed font-medium transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        The revolutionary platform connecting content creators with engaged viewers.<br />
+        <span className="text-amber-200">Promote your videos, earn rewards, and build authentic communities.</span>
       </p>
-      <div className={`flex flex-col md:flex-row gap-6 justify-center items-center transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <button className="px-8 py-4 bg-pink-500 rounded-full text-xl font-semibold hover:bg-pink-400 transition-all transform hover:scale-105 text-white">
-          Start Creating
+      
+      {/* Call-to-Action Buttons */}
+      <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mt-12 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <button className="px-10 py-4 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full text-lg font-bold hover:from-pink-400 hover:to-pink-500 transition-all transform hover:scale-105 text-white shadow-2xl hover:shadow-pink-500/25 min-w-[200px]">
+          🚀 Start Creating
         </button>
-        <button className="px-8 py-4 bg-white/20 backdrop-blur-sm rounded-full text-xl font-semibold hover:bg-white/30 transition-all text-white border border-white/20">
-          Start Watching & Earning
+        <button className="px-10 py-4 bg-white/20 backdrop-blur-md rounded-full text-lg font-bold hover:bg-white/30 transition-all text-white border border-white/30 hover:border-white/50 shadow-2xl hover:shadow-white/10 min-w-[200px]">
+          💰 Start Earning
         </button>
+      </div>
+      
+      {/* Stats or Features Preview */}
+      <div className={`mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className="text-center">
+          <div className="text-3xl font-bold text-amber-400 mb-2">10K+</div>
+          <div className="text-white/80 text-sm font-medium">Active Creators</div>
+        </div>
+        <div className="text-center">
+          <div className="text-3xl font-bold text-pink-400 mb-2">1M+</div>
+          <div className="text-white/80 text-sm font-medium">Video Views</div>
+        </div>
+        <div className="text-center">
+          <div className="text-3xl font-bold text-indigo-400 mb-2">$50K+</div>
+          <div className="text-white/80 text-sm font-medium">Rewards Distributed</div>
+        </div>
       </div>
     </div>
   </div>
 
   {/* Enhanced Floating Elements */}
   <div className="absolute inset-0 overflow-hidden pointer-events-none z-30">
-    <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl animate-float"></div>
-    <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-pink-400/10 rounded-full blur-3xl animate-float" style={{animationDelay: '-3s'}}></div>
-    <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-indigo-400/15 rounded-full blur-2xl animate-float" style={{animationDelay: '-1.5s'}}></div>
+    <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-400/15 rounded-full blur-3xl animate-float"></div>
+    <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-pink-400/15 rounded-full blur-3xl animate-float" style={{animationDelay: '-3s'}}></div>
+    <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-indigo-400/20 rounded-full blur-2xl animate-float" style={{animationDelay: '-1.5s'}}></div>
+    <div className="absolute top-3/4 left-1/3 w-48 h-48 bg-purple-400/10 rounded-full blur-3xl animate-float" style={{animationDelay: '-4s'}}></div>
+  </div>
+
+  {/* Animated Particles */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none z-20">
+    <div className="absolute top-1/4 right-1/4 w-2 h-2 bg-white/30 rounded-full animate-ping" style={{animationDelay: '0s'}}></div>
+    <div className="absolute top-1/2 left-1/4 w-1 h-1 bg-amber-400/50 rounded-full animate-ping" style={{animationDelay: '2s'}}></div>
+    <div className="absolute top-3/4 right-1/2 w-1.5 h-1.5 bg-pink-400/40 rounded-full animate-ping" style={{animationDelay: '4s'}}></div>
   </div>
 </div>
 
