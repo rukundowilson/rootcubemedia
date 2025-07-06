@@ -4,6 +4,7 @@ import { Youtube, Instagram, Music, ExternalLink } from 'lucide-react';
 
 const RootCubeLandingPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const platforms = [
     {
@@ -132,7 +133,7 @@ const RootCubeLandingPage: React.FC = () => {
 <div className="relative min-h-screen overflow-hidden">
   {/* Background Image with Overlay */}
   <div 
-    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat sm:bg-center sm:bg-cover bg-[position:60%_center] bg-[length:150%] sm:bg-[length:cover]"
     style={{
       backgroundImage: 'url(https://buse.de/wp-content/uploads/2025/01/sind-influencer-handelsvertreter.webp)'
     }}
@@ -142,16 +143,13 @@ const RootCubeLandingPage: React.FC = () => {
     {/* Gradient overlay to blend with your existing design */}
     <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/60 via-purple-900/40 to-pink-900/60"></div>
   </div>
-
   {/* Navigation */}
   <nav className="relative z-50 px-6 py-4">
     <div className="max-w-7xl mx-auto flex justify-between items-center">
       <div className="flex items-center space-x-3">
-        <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-          <span className="text-indigo-600 font-bold text-xl">R</span>
-        </div>
-        <span className="text-2xl font-bold text-white">RootCubeMedia</span>
+        <span className="text-2xl font-bold text-white">mediabox</span>
       </div>
+      {/* Desktop Nav */}
       <div className="hidden md:flex space-x-8">
         <button 
           onClick={() => scrollToSection('features')}
@@ -172,7 +170,19 @@ const RootCubeLandingPage: React.FC = () => {
           careers
         </button>
       </div>
-      <div className="flex space-x-4">
+      {/* Mobile Hamburger */}
+      <div className="md:hidden flex items-center">
+        <button
+          onClick={() => setMobileMenuOpen((open) => !open)}
+          className="text-white focus:outline-none"
+          aria-label="Open menu"
+        >
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <div className="hidden md:flex space-x-4">
         <button className="px-6 py-2 rounded-full border border-white/30 hover:bg-white/10 transition-all text-white">
           Login
         </button>
@@ -181,6 +191,46 @@ const RootCubeLandingPage: React.FC = () => {
         </button>
       </div>
     </div>
+    {/* Mobile Menu */}
+    {mobileMenuOpen && (
+      <div className="md:hidden absolute top-full left-0 w-full bg-gray-900 border-t border-white/10 shadow-lg z-50">
+        <div className="flex flex-col px-6 py-4 space-y-2">
+          <button 
+            onClick={() => { scrollToSection('features'); setMobileMenuOpen(false); }}
+            className="text-white hover:text-amber-400 transition-colors text-left py-2"
+          >
+            {/* Hide on small screens, show on md+ */}
+            <div className="hidden md:flex space-x-4">
+              <button className="px-6 py-2 rounded-full border border-white/30 hover:bg-white/10 transition-all text-white">
+                Login
+              </button>
+              <button className="px-6 py-2 bg-amber-500 rounded-full hover:bg-amber-400 transition-all font-semibold text-black">
+                Get Started
+              </button>
+            </div></button>
+          <button 
+            onClick={() => { scrollToSection('how-it-works'); setMobileMenuOpen(false); }}
+            className="text-white hover:text-amber-400 transition-colors text-left py-2"
+          >
+            How It Works
+          </button>
+          <button 
+            onClick={() => { scrollToSection('tech-stack'); setMobileMenuOpen(false); }}
+            className="text-white hover:text-amber-400 transition-colors text-left py-2"
+          >
+            careers
+          </button>
+          <div className="flex space-x-4 mt-4">
+            <button className="px-6 py-2 rounded-full border border-white/30 hover:bg-white/10 transition-all text-white">
+              Login
+            </button>
+            <button className="px-6 py-2 bg-amber-500 rounded-full hover:bg-amber-400 transition-all font-semibold text-black">
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
   </nav>
 
   {/* Hero Content */}
@@ -207,22 +257,6 @@ const RootCubeLandingPage: React.FC = () => {
           💰 Start Earning
         </button>
       </div>
-      
-      {/* Stats or Features Preview */}
-      <div className={`mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="text-center">
-          <div className="text-3xl font-bold text-amber-400 mb-2">10K+</div>
-          <div className="text-white/80 text-sm font-medium">Active Creators</div>
-        </div>
-        <div className="text-center">
-          <div className="text-3xl font-bold text-pink-400 mb-2">1M+</div>
-          <div className="text-white/80 text-sm font-medium">Video Views</div>
-        </div>
-        <div className="text-center">
-          <div className="text-3xl font-bold text-indigo-400 mb-2">$50K+</div>
-          <div className="text-white/80 text-sm font-medium">Rewards Distributed</div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -243,208 +277,208 @@ const RootCubeLandingPage: React.FC = () => {
 </div>
 
      {/* Enhanced User Types Section */}
-<section id="features" className="py-32 bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 relative overflow-hidden">
-  {/* Animated background elements */}
-  <div className="absolute inset-0 opacity-10">
-    <div className="absolute top-20 left-20 w-72 h-72 bg-pink-500 rounded-full blur-3xl floating-element"></div>
-    <div className="absolute top-40 right-20 w-96 h-96 bg-indigo-500 rounded-full blur-3xl floating-element"></div>
-    <div className="absolute bottom-20 left-1/2 w-80 h-80 bg-amber-500 rounded-full blur-3xl floating-element"></div>
-  </div>
-  
-  <div className="max-w-7xl mx-auto px-6 relative z-10">
-    <div className="text-center mb-20">
-      <h2 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">
-        Choose Your Path
-      </h2>
-      <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-        Join thousands of creators, promoters, and viewers in the ultimate content ecosystem
-      </p>
-    </div>
-    
-    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      {/* Artists/Creators Card */}
-      <div className="group relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-indigo-500 rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-all duration-500"></div>
-        <div className="relative bg-gradient-to-br from-pink-500/10 to-indigo-500/10 p-8 rounded-3xl backdrop-blur-sm border border-white/10 hover:border-pink-500/50 transition-all duration-500 hover:scale-105 hover:rotate-1">
-          <div className="text-8xl mb-8 text-center filter drop-shadow-lg">🎨</div>
-          <h3 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-pink-400 to-pink-300 bg-clip-text text-transparent">
-            Artists & Creators
-          </h3>
-          <div className="space-y-4 mb-8">
-            {[
-              "Promote your short videos (≤30s) to real audiences",
-              "Advanced analytics & engagement tracking", 
-              "Target specific audiences & categories",
-              "Pay per campaign with mobile money"
-            ].map((feature, index) => (
-              <div key={index} className="flex items-start space-x-3 group/item">
-                <div className="w-3 h-3 bg-pink-400 rounded-full mt-2 flex-shrink-0 group-hover/item:scale-125 transition-transform"></div>
-                <span className="text-gray-300 group-hover/item:text-white transition-colors">{feature}</span>
-              </div>
-            ))}
-          </div>
-          <button className="w-full py-4 bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl font-semibold hover:from-pink-400 hover:to-pink-500 transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/25 pulse-border">
-            Start Promoting ✨
-          </button>
-        </div>
-      </div>
-
-      {/* Promoters Card */}
-      <div className="group relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-pink-500 rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-all duration-500"></div>
-        <div className="relative bg-gradient-to-br from-amber-500/10 to-pink-500/10 p-8 rounded-3xl backdrop-blur-sm border border-white/10 hover:border-amber-500/50 transition-all duration-500 hover:scale-105 hover:-rotate-1">
-          <div className="text-8xl mb-8 text-center filter drop-shadow-lg">📢</div>
-          <h3 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-amber-400 to-amber-300 bg-clip-text text-transparent">
-            Verified Promoters
-          </h3>
-          <div className="space-y-4 mb-8">
-            {[
-              "Apply for promoter status with social media verification",
-              "Get verified after social media review",
-              "Access to premium promotion tools", 
-              "Enhanced reach & targeting options"
-            ].map((feature, index) => (
-              <div key={index} className="flex items-start space-x-3 group/item">
-                <div className="w-3 h-3 bg-amber-400 rounded-full mt-2 flex-shrink-0 group-hover/item:scale-125 transition-transform"></div>
-                <span className="text-gray-300 group-hover/item:text-white transition-colors">{feature}</span>
-              </div>
-            ))}
-          </div>
-          <button className="w-full py-4 bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl font-semibold hover:from-amber-400 hover:to-amber-500 transition-all duration-300 text-black hover:shadow-lg hover:shadow-amber-500/25 pulse-border">
-            Apply for Verification ⚡
-          </button>
-        </div>
-      </div>
-
-      {/* Viewers Card */}
-      <div className="group relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-amber-500 rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-all duration-500"></div>
-        <div className="relative bg-gradient-to-br from-indigo-500/10 to-amber-500/10 p-8 rounded-3xl backdrop-blur-sm border border-white/10 hover:border-indigo-500/50 transition-all duration-500 hover:scale-105 hover:rotate-1">
-          <div className="text-8xl mb-8 text-center filter drop-shadow-lg">👀</div>
-          <h3 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">
-            Viewers & Earners
-          </h3>
-          <div className="space-y-4 mb-8">
-            {[
-              "Watch engaging short videos (30s max)",
-              "Earn rewards for every view & engagement",
-              "Withdraw up to 300,000 RWF monthly",
-              "Discover new content & creators"
-            ].map((feature, index) => (
-              <div key={index} className="flex items-start space-x-3 group/item">
-                <div className="w-3 h-3 bg-indigo-400 rounded-full mt-2 flex-shrink-0 group-hover/item:scale-125 transition-transform"></div>
-                <span className="text-gray-300 group-hover/item:text-white transition-colors">{feature}</span>
-              </div>
-            ))}
-          </div>
-          <button className="w-full py-4 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-2xl font-semibold hover:from-indigo-400 hover:to-indigo-500 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/25 pulse-border">
-            Start Earning 💰
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-{/* Enhanced How It Works Section */}
-<section id="how-it-works" className="py-32 bg-gradient-to-br from-gray-900 via-purple-900/10 to-gray-800 relative overflow-hidden">
-  {/* Animated background grid */}
-  <div className="absolute inset-0 opacity-5">
-    <div className="grid grid-cols-8 gap-4 h-full">
-      {Array.from({ length: 64 }).map((_, i) => (
-        <div key={i} className="border border-white/20 rounded-lg floating-element" style={{animationDelay: `${i * 0.1}s`}}></div>
-      ))}
-    </div>
-  </div>
-  
-  <div className="max-w-7xl mx-auto px-6 relative z-10">
-    <div className="text-center mb-20">
-      <h2 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-amber-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent">
-        How It Works
-      </h2>
-      <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-        Simple, secure, and rewarding process for everyone
-      </p>
-    </div>
-    
-    <div className="grid md:grid-cols-2 gap-20 items-center">
-      <div className="space-y-12">
-        {[
-          {
-            number: "1",
-            title: "Creators Upload & Pay",
-            description: "Artists upload their short videos and set up promotion campaigns with targeted audiences. Payment is simple with mobile money integration.",
-            color: "pink",
-            icon: "🎬"
-          },
-          {
-            number: "2", 
-            title: "Verification Process",
-            description: "Promoters apply for verification through social media review, ensuring quality and authenticity across the platform.",
-            color: "amber",
-            icon: "✅"
-          },
-          {
-            number: "3",
-            title: "Viewers Watch & Earn", 
-            description: "Real users watch promoted content, engage authentically, and earn rewards that can be withdrawn monthly up to 300,000 RWF.",
-            color: "indigo",
-            icon: "💎"
-          }
-        ].map((step, index) => (
-          <div key={index} className="group flex items-start space-x-8 hover:scale-105 transition-all duration-500">
-            <div className={`relative w-20 h-20 bg-gradient-to-br ${
-              step.color === 'pink' ? 'from-pink-500 to-pink-600' :
-              step.color === 'amber' ? 'from-amber-500 to-amber-600' :
-              'from-indigo-500 to-indigo-600'
-            } rounded-2xl flex items-center justify-center text-2xl font-bold flex-shrink-0 group-hover:rotate-12 transition-transform duration-500 shadow-lg ${
-              step.color === 'pink' ? 'shadow-pink-500/25' :
-              step.color === 'amber' ? 'shadow-amber-500/25' :
-              'shadow-indigo-500/25'
-            }`}>
-              <span className={step.color === 'amber' ? 'text-black' : 'text-white'}>{step.number}</span>
-              <div className="absolute -top-2 -right-2 text-2xl">{step.icon}</div>
-            </div>
-            <div className="flex-1">
-              <h3 className={`text-3xl font-bold mb-4 bg-gradient-to-r ${
-                step.color === 'pink' ? 'from-pink-400 to-pink-300' :
-                step.color === 'amber' ? 'from-amber-400 to-amber-300' :
-                'from-indigo-400 to-indigo-300'
-              } bg-clip-text text-transparent`}>
-                {step.title}
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed group-hover:text-white transition-colors">
-                {step.description}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      <div className="relative">
-        {/* Main phone mockup */}
-        <div className="relative w-full h-96 bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl backdrop-blur-sm border border-white/10 flex items-center justify-center neon-glow">
-          <div className="text-9xl animate-pulse">📱</div>
+      <section id="features" className="py-32 bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-pink-500 rounded-full blur-3xl floating-element"></div>
+          <div className="absolute top-40 right-20 w-96 h-96 bg-indigo-500 rounded-full blur-3xl floating-element"></div>
+          <div className="absolute bottom-20 left-1/2 w-80 h-80 bg-amber-500 rounded-full blur-3xl floating-element"></div>
         </div>
         
-        {/* Floating elements */}
-        <div className="absolute -top-8 -right-8 w-24 h-24 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center floating-element shadow-lg shadow-amber-500/25">
-          <span className="text-3xl">💰</span>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-20">
+            <h2 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">
+              Choose Your Path
+            </h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              Join thousands of creators, promoters, and viewers in the ultimate content ecosystem
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Artists/Creators Card */}
+            <div className="group relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-indigo-500 rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-all duration-500"></div>
+              <div className="relative bg-gradient-to-br from-pink-500/10 to-indigo-500/10 p-8 rounded-3xl backdrop-blur-sm border border-white/10 hover:border-pink-500/50 transition-all duration-500 hover:scale-105 hover:rotate-1">
+                <div className="text-8xl mb-8 text-center filter drop-shadow-lg">🎨</div>
+                <h3 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-pink-400 to-pink-300 bg-clip-text text-transparent">
+                  Artists & Creators
+                </h3>
+                <div className="space-y-4 mb-8">
+                  {[
+                    "Promote your short videos (≤30s) to real audiences",
+                    "Advanced analytics & engagement tracking", 
+                    "Target specific audiences & categories",
+                    "Pay per campaign with mobile money"
+                  ].map((feature, index) => (
+                    <div key={index} className="flex items-start space-x-3 group/item">
+                      <div className="w-3 h-3 bg-pink-400 rounded-full mt-2 flex-shrink-0 group-hover/item:scale-125 transition-transform"></div>
+                      <span className="text-gray-300 group-hover/item:text-white transition-colors">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <button className="w-full py-4 bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl font-semibold hover:from-pink-400 hover:to-pink-500 transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/25 pulse-border">
+                  Start Promoting ✨
+                </button>
+              </div>
+            </div>
+
+            {/* Promoters Card */}
+            <div className="group relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-pink-500 rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-all duration-500"></div>
+              <div className="relative bg-gradient-to-br from-amber-500/10 to-pink-500/10 p-8 rounded-3xl backdrop-blur-sm border border-white/10 hover:border-amber-500/50 transition-all duration-500 hover:scale-105 hover:-rotate-1">
+                <div className="text-8xl mb-8 text-center filter drop-shadow-lg">📢</div>
+                <h3 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-amber-400 to-amber-300 bg-clip-text text-transparent">
+                  Verified Promoters
+                </h3>
+                <div className="space-y-4 mb-8">
+                  {[
+                    "Apply for promoter status with social media verification",
+                    "Get verified after social media review",
+                    "Access to premium promotion tools", 
+                    "Enhanced reach & targeting options"
+                  ].map((feature, index) => (
+                    <div key={index} className="flex items-start space-x-3 group/item">
+                      <div className="w-3 h-3 bg-amber-400 rounded-full mt-2 flex-shrink-0 group-hover/item:scale-125 transition-transform"></div>
+                      <span className="text-gray-300 group-hover/item:text-white transition-colors">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <button className="w-full py-4 bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl font-semibold hover:from-amber-400 hover:to-amber-500 transition-all duration-300 text-black hover:shadow-lg hover:shadow-amber-500/25 pulse-border">
+                  Apply for Verification ⚡
+                </button>
+              </div>
+            </div>
+
+            {/* Viewers Card */}
+            <div className="group relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-amber-500 rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-all duration-500"></div>
+              <div className="relative bg-gradient-to-br from-indigo-500/10 to-amber-500/10 p-8 rounded-3xl backdrop-blur-sm border border-white/10 hover:border-indigo-500/50 transition-all duration-500 hover:scale-105 hover:rotate-1">
+                <div className="text-8xl mb-8 text-center filter drop-shadow-lg">👀</div>
+                <h3 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">
+                  Viewers & Earners
+                </h3>
+                <div className="space-y-4 mb-8">
+                  {[
+                    "Watch engaging short videos (30s max)",
+                    "Earn rewards for every view & engagement",
+                    "Withdraw up to 300,000 RWF monthly",
+                    "Discover new content & creators"
+                  ].map((feature, index) => (
+                    <div key={index} className="flex items-start space-x-3 group/item">
+                      <div className="w-3 h-3 bg-indigo-400 rounded-full mt-2 flex-shrink-0 group-hover/item:scale-125 transition-transform"></div>
+                      <span className="text-gray-300 group-hover/item:text-white transition-colors">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <button className="w-full py-4 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-2xl font-semibold hover:from-indigo-400 hover:to-indigo-500 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/25 pulse-border">
+                  Start Earning 💰
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-gradient-to-br from-pink-500/60 to-purple-500/60 rounded-full flex items-center justify-center floating-element backdrop-blur-sm border border-white/20">
-          <span className="text-4xl">🎬</span>
-        </div>
-        <div className="absolute top-1/2 -right-12 w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center floating-element shadow-lg shadow-indigo-500/25">
-          <span className="text-2xl">👀</span>
+      </section>
+
+      {/* Enhanced How It Works Section */}
+      <section id="how-it-works" className="py-32 bg-gradient-to-br from-gray-900 via-purple-900/10 to-gray-800 relative overflow-hidden">
+        {/* Animated background grid */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="grid grid-cols-8 gap-4 h-full">
+            {Array.from({ length: 64 }).map((_, i) => (
+              <div key={i} className="border border-white/20 rounded-lg floating-element" style={{animationDelay: `${i * 0.1}s`}}></div>
+            ))}
+          </div>
         </div>
         
-        {/* Connecting lines */}
-        <div className="absolute top-1/4 left-1/4 w-16 h-0.5 bg-gradient-to-r from-pink-500/50 to-transparent rotating-line"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-12 h-0.5 bg-gradient-to-r from-indigo-500/50 to-transparent rotating-line" style={{animationDelay: '1s'}}></div>
-      </div>
-    </div>
-  </div>
-</section>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-20">
+            <h2 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-amber-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent">
+              How It Works
+            </h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              Simple, secure, and rewarding process for everyone
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-20 items-center">
+            <div className="space-y-12">
+              {[
+                {
+                  number: "1",
+                  title: "Creators Upload & Pay",
+                  description: "Artists upload their short videos and set up promotion campaigns with targeted audiences. Payment is simple with mobile money integration.",
+                  color: "pink",
+                  icon: "🎬"
+                },
+                {
+                  number: "2", 
+                  title: "Verification Process",
+                  description: "Promoters apply for verification through social media review, ensuring quality and authenticity across the platform.",
+                  color: "amber",
+                  icon: "✅"
+                },
+                {
+                  number: "3",
+                  title: "Viewers Watch & Earn", 
+                  description: "Real users watch promoted content, engage authentically, and earn rewards that can be withdrawn monthly up to 300,000 RWF.",
+                  color: "indigo",
+                  icon: "💎"
+                }
+              ].map((step, index) => (
+                <div key={index} className="group flex items-start space-x-8 hover:scale-105 transition-all duration-500">
+                  <div className={`relative w-20 h-20 bg-gradient-to-br ${
+                    step.color === 'pink' ? 'from-pink-500 to-pink-600' :
+                    step.color === 'amber' ? 'from-amber-500 to-amber-600' :
+                    'from-indigo-500 to-indigo-600'
+                  } rounded-2xl flex items-center justify-center text-2xl font-bold flex-shrink-0 group-hover:rotate-12 transition-transform duration-500 shadow-lg ${
+                    step.color === 'pink' ? 'shadow-pink-500/25' :
+                    step.color === 'amber' ? 'shadow-amber-500/25' :
+                    'shadow-indigo-500/25'
+                  }`}>
+                    <span className={step.color === 'amber' ? 'text-black' : 'text-white'}>{step.number}</span>
+                    <div className="absolute -top-2 -right-2 text-2xl">{step.icon}</div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className={`text-3xl font-bold mb-4 bg-gradient-to-r ${
+                      step.color === 'pink' ? 'from-pink-400 to-pink-300' :
+                      step.color === 'amber' ? 'from-amber-400 to-amber-300' :
+                      'from-indigo-400 to-indigo-300'
+                    } bg-clip-text text-transparent`}>
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-300 text-lg leading-relaxed group-hover:text-white transition-colors">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="relative">
+              {/* Main phone mockup */}
+              <div className="relative w-full h-96 bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl backdrop-blur-sm border border-white/10 flex items-center justify-center neon-glow">
+                <div className="text-9xl animate-pulse">📱</div>
+              </div>
+              
+              {/* Floating elements */}
+              <div className="absolute -top-8 -right-8 w-24 h-24 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center floating-element shadow-lg shadow-amber-500/25">
+                <span className="text-3xl">💰</span>
+              </div>
+              <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-gradient-to-br from-pink-500/60 to-purple-500/60 rounded-full flex items-center justify-center floating-element backdrop-blur-sm border border-white/20">
+                <span className="text-4xl">🎬</span>
+              </div>
+              <div className="absolute top-1/2 -right-12 w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center floating-element shadow-lg shadow-indigo-500/25">
+                <span className="text-2xl">👀</span>
+              </div>
+              
+              {/* Connecting lines */}
+              <div className="absolute top-1/4 left-1/4 w-16 h-0.5 bg-gradient-to-r from-pink-500/50 to-transparent rotating-line"></div>
+              <div className="absolute bottom-1/4 right-1/4 w-12 h-0.5 bg-gradient-to-r from-indigo-500/50 to-transparent rotating-line" style={{animationDelay: '1s'}}></div>
+            </div>
+          </div>
+        </div>
+      </section>
 
 
       {/* Stats Section */}
@@ -475,77 +509,159 @@ const RootCubeLandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* supported platforms */}
-      <section className="py-32 bg-gradient-to-br from-gray-800 to-gray-900">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className=".">
-            Promote Your Content
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Amplify your reach across all major social platforms. Upload, optimize, and promote your content with our integrated promotion tools.
-          </p>
-        </div>
+{/* Enhanced Supported Platforms Section */}
+<section className="py-32 bg-gradient-to-br from-gray-900 via-purple-900/5 to-gray-800 relative overflow-hidden">
+  {/* Animated background network */}
+  <div className="absolute inset-0 opacity-10">
+    <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-purple-400 rounded-full animate-ping"></div>
+    <div className="absolute top-3/4 right-1/4 w-2 h-2 bg-blue-400 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
+    <div className="absolute bottom-1/4 left-1/2 w-2 h-2 bg-pink-400 rounded-full animate-ping" style={{animationDelay: '2s'}}></div>
+    
+    {/* Connecting lines */}
+    <svg className="absolute inset-0 w-full h-full">
+      <defs>
+        <linearGradient id="networkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="rgba(139, 92, 246, 0.2)" />
+          <stop offset="50%" stopColor="rgba(59, 130, 246, 0.2)" />
+          <stop offset="100%" stopColor="rgba(236, 72, 153, 0.2)" />
+        </linearGradient>
+      </defs>
+      <path d="M200,150 Q400,100 600,200 T1000,250" stroke="url(#networkGradient)" strokeWidth="1" fill="none" opacity="0.3">
+        <animate attributeName="stroke-dasharray" values="0,1000;1000,0;0,1000" dur="8s" repeatCount="indefinite"/>
+      </path>
+    </svg>
+  </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {platforms.map((platform, index) => (
-            <div
-              key={platform.name}
-              className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${platform.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
-              
-              <div className="relative p-8">
-                <div className={`inline-flex items-center justify-center w-16 h-16 ${platform.bgColor} rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <div className={platform.textColor}>
-                    {platform.icon}
-                  </div>
-                </div>
-                
-                <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                  {platform.name}
-                </h3>
-                
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  {platform.description}
-                </p>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-green-600 font-medium">Active Promotion</span>
-                  </div>
-                  
-                  <button className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium group-hover:translate-x-1 transition-all duration-300">
-                    <span>Promote</span>
-                    <ExternalLink className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-              
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-            </div>
-          ))}
+  <div className="max-w-6xl mx-auto px-6 relative z-10">
+    <div className="text-center mb-20">
+      <h2 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 bg-clip-text text-transparent">
+        Promote Your Content
+      </h2>
+      <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        Amplify your reach across all major social platforms. Upload, optimize, and promote your content with our integrated promotion tools.
+      </p>
+      
+      {/* Floating stats */}
+      <div className="flex justify-center items-center space-x-8 mt-8">
+        <div className="flex items-center space-x-2 text-green-400">
+          <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+          <span className="text-sm font-medium">15+ Platforms</span>
         </div>
-
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center space-x-4 bg-white rounded-full px-8 py-4 shadow-lg">
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-gray-700">
-                Cross-platform promotion tools integrated
-              </span>
-            </div>
-            <div className="w-px h-6 bg-gray-200"></div>
-            <span className="text-sm text-gray-500">
-              Upload once, promote everywhere
-            </span>
-          </div>
+        <div className="w-px h-6 bg-gray-600"></div>
+        <div className="flex items-center space-x-2 text-blue-400">
+          <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
+          <span className="text-sm font-medium">Real-time Analytics</span>
+        </div>
+        <div className="w-px h-6 bg-gray-600"></div>
+        <div className="flex items-center space-x-2 text-purple-400">
+          <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse"></div>
+          <span className="text-sm font-medium">Auto-optimization</span>
         </div>
       </div>
-    </section>
+    </div>
 
-      Tech Stack
+    <div className="grid md:grid-cols-3 gap-8 relative">
+      {platforms.map((platform, index) => (
+        <div
+          key={platform.name}
+          className="group relative overflow-hidden rounded-3xl holographic-border platform-glow hover:scale-105 transition-all duration-500"
+        >
+          {/* Network connection lines */}
+          <div className="network-lines"></div>
+          
+          {/* Animated background gradient */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${platform.color} opacity-0 group-hover:opacity-10 transition-all duration-500`}></div>
+          
+          {/* Floating particles */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-4 right-4 w-2 h-2 bg-white/20 rounded-full animate-ping group-hover:animate-pulse"></div>
+            <div className="absolute bottom-8 left-6 w-1 h-1 bg-white/30 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+            <div className="absolute top-1/2 right-8 w-1.5 h-1.5 bg-white/25 rounded-full animate-ping" style={{animationDelay: '2s'}}></div>
+          </div>
+          
+          <div className="relative p-8 backdrop-blur-sm">
+            <div className={`relative inline-flex items-center justify-center w-20 h-20 ${platform.bgColor} rounded-3xl mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 orbit-animation`}>
+              <div className={`${platform.textColor} text-2xl`}>
+                {platform.icon}
+              </div>
+              
+              {/* Orbit ring */}
+              <div className="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-3xl transition-all duration-500"></div>
+            </div>
+            
+            <h3 className="text-3xl font-bold text-white mb-4 group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">
+              {platform.name}
+            </h3>
+            
+            <p className="text-gray-300 mb-8 leading-relaxed group-hover:text-white transition-colors duration-300">
+              {platform.description}
+            </p>
+            
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="relative">
+                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="absolute inset-0 w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
+                </div>
+                <span className="text-sm text-green-400 font-medium">Active Promotion</span>
+              </div>
+              
+              <button className="group/btn relative inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-2xl font-medium hover:from-purple-400 hover:to-pink-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
+                <span>Promote</span>
+                <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                
+                {/* Button glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur-lg opacity-0 group-hover/btn:opacity-30 transition-opacity duration-300"></div>
+              </button>
+            </div>
+          </div>
+          
+          {/* Bottom accent line */}
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-pink-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+          
+          {/* Corner accents */}
+          <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-white/20 rounded-tl-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-white/20 rounded-br-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        </div>
+      ))}
+    </div>
+
+    {/* Enhanced bottom status bar */}
+    <div className="mt-20 text-center">
+      <div className="relative inline-flex items-center space-x-6 bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-pink-900/30 backdrop-blur-lg rounded-full px-10 py-6 border border-white/10 hover:border-white/20 transition-all duration-300 group">
+        {/* Animated background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-pink-500/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        
+        <div className="relative flex items-center space-x-3">
+          <div className="relative">
+            <div className="w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
+            <div className="absolute inset-0 w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
+          </div>
+          <span className="text-base font-medium text-white">
+            Cross-platform promotion tools integrated
+          </span>
+        </div>
+        
+        <div className="w-px h-8 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+        
+        <div className="relative flex items-center space-x-2">
+          <span className="text-gray-300">
+            Upload anywhere, promote with us
+          </span>
+          <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+        </div>
+        
+        {/* Floating icons */}
+        <div className="absolute -top-3 -right-3 w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-all duration-300 animate-bounce">
+          🚀
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+      {/* Tech Stack */}
       <section id="tech-stack" className="py-32 bg-gradient-to-br from-gray-800 to-gray-900">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-5xl font-bold text-center mb-20 text-gradient animate-on-scroll">
@@ -607,7 +723,7 @@ const RootCubeLandingPage: React.FC = () => {
                 <div className="w-10 h-10 bg-indigo-500 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-xl">R</span>
                 </div>
-                <span className="text-2xl font-bold">RootCubeMedia</span>
+                <span className="text-2xl font-bold">mediabox</span>
               </div>
               <p className="text-gray-400">
                 Connecting creators with audiences through authentic engagement and fair rewards.
@@ -641,7 +757,7 @@ const RootCubeLandingPage: React.FC = () => {
             </div>
           </div>
           <div className="border-t border-white/10 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 RootCubeMedia. All rights reserved.</p>
+            <p>&copy; 2025 mediabox. All rights reserved.</p>
           </div>
         </div>
       </footer>
