@@ -1,6 +1,59 @@
  "use client"
  import React, { useEffect, useState } from 'react';
-import { Youtube, Instagram, Music, ExternalLink } from 'lucide-react';
+import { Youtube, Instagram, Music, ExternalLink, Globe, Star, CheckCircle } from 'lucide-react';
+
+const eligibilityRequirements = [
+  "Must have at least 1,000 followers on a major social platform",
+  "Active and public social media profile",
+  "Pass our social media authenticity review",
+  "Ability to promote content to a real audience",
+  "Comply with our community guidelines"
+];
+
+const benefits = [
+  {
+    title: "Instant Access to Campaigns",
+    description: "Browse and join high-paying campaigns from top creators and brands.",
+    icon: <ExternalLink className="w-8 h-8" />,
+    gradient: "from-pink-500 to-purple-500",
+    bgGradient: "from-pink-500/10 to-purple-500/10"
+  },
+  {
+    title: "Earn Real Rewards",
+    description: "Get paid for every successful promotion and engagement you drive.",
+    icon: <Star className="w-8 h-8" />,
+    gradient: "from-amber-400 to-amber-600",
+    bgGradient: "from-amber-400/10 to-amber-600/10"
+  },
+  {
+    title: "Grow Your Audience",
+    description: "Build your personal brand and gain followers while promoting content.",
+    icon: <Instagram className="w-8 h-8" />,
+    gradient: "from-pink-400 via-purple-400 to-indigo-400",
+    bgGradient: "from-pink-400/10 via-purple-400/10 to-indigo-400/10"
+  },
+  {
+    title: "Advanced Analytics",
+    description: "Track your performance and optimize your campaigns with real-time data.",
+    icon: <Globe className="w-8 h-8" />,
+    gradient: "from-blue-400 to-purple-400",
+    bgGradient: "from-blue-400/10 to-purple-400/10"
+  },
+  {
+    title: "Priority Support",
+    description: "Get help fast with our dedicated promoter support team.",
+    icon: <Youtube className="w-8 h-8" />,
+    gradient: "from-red-500 to-red-600",
+    bgGradient: "from-red-500/10 to-red-600/10"
+  },
+  {
+    title: "Exclusive Community",
+    description: "Join a network of verified promoters and access exclusive resources.",
+    icon: <Music className="w-8 h-8" />,
+    gradient: "from-indigo-500 to-pink-500",
+    bgGradient: "from-indigo-500/10 to-pink-500/10"
+  }
+];
 
 const RootCubeLandingPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -481,33 +534,86 @@ const RootCubeLandingPage: React.FC = () => {
       </section>
 
 
-      {/* Stats Section */}
-      <section className="py-32 bg-gradient-to-br from-gray-800 to-gray-900">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-5xl font-bold mb-20 text-gradient animate-on-scroll">
-            Platform Impact
+      {/* benefits for promoters highlighted */}
+      <section className="py-32 bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+      {/* Floating background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-pink-500/30 to-purple-600/30 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-blue-500/30 to-cyan-600/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-yellow-500/20 to-orange-600/20 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
+        <div className="mb-20">
+          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
+            Get Hired as a Promoter in a Snap
           </h2>
-          
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="p-8 animate-on-scroll">
-              <div className="text-5xl font-bold text-pink-400 mb-4">10K+</div>
-              <div className="text-xl text-gray-300">Active Creators</div>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Join our elite network of promoters and unlock unlimited earning potential while building your personal brand
+          </p>
+        </div>
+
+        {/* Benefits Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          {benefits.map((benefit, index) => (
+            <div 
+              key={index}
+              className={`group relative p-8 rounded-2xl bg-gradient-to-br ${benefit.bgGradient} backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105 hover:shadow-2xl`}
+            >
+              <div className={`inline-flex p-4 rounded-xl bg-gradient-to-r ${benefit.gradient} text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                {benefit.icon}
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">{benefit.title}</h3>
+              <p className="text-gray-300 leading-relaxed">{benefit.description}</p>
             </div>
-            <div className="p-8 animate-on-scroll">
-              <div className="text-5xl font-bold text-amber-400 mb-4">50K+</div>
-              <div className="text-xl text-gray-300">Video Views Daily</div>
-            </div>
-            <div className="p-8 animate-on-scroll">
-              <div className="text-5xl font-bold text-indigo-400 mb-4">25K+</div>
-              <div className="text-xl text-gray-300">Earning Viewers</div>
-            </div>
-            <div className="p-8 animate-on-scroll">
-              <div className="text-5xl font-bold text-white mb-4">500+</div>
-              <div className="text-xl text-gray-300">Verified Promoters</div>
+          ))}
+        </div>
+
+        {/* Eligibility Requirements */}
+        <div className="bg-gradient-to-r from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-3xl p-12 border border-white/10 mb-12">
+          <div className="flex items-center justify-center mb-8">
+            <div className="flex items-center space-x-4">
+              <div className="p-3 bg-gradient-to-r from-green-400 to-emerald-600 rounded-full">
+                <CheckCircle className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-3xl font-bold text-white">Eligibility Requirements</h3>
             </div>
           </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {eligibilityRequirements.map((requirement, index) => (
+              <div key={index} className="flex items-center space-x-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors duration-300">
+                <div className="flex-shrink-0">
+                  <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-600 rounded-full"></div>
+                </div>
+                <span className="text-gray-300 font-medium">{requirement}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </section>
+
+        {/* Call-to-Action */}
+        <div className="text-center">
+          <div className="inline-flex flex-col sm:flex-row gap-4">
+            <button className="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold rounded-full hover:from-pink-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <span className="flex items-center space-x-2">
+                <Star className="w-5 h-5" />
+                <span>Apply as Promoter</span>
+              </span>
+            </button>
+            <button className="px-8 py-4 bg-transparent border-2 border-purple-400 text-purple-400 font-bold rounded-full hover:bg-purple-400 hover:text-white transform hover:scale-105 transition-all duration-300">
+              <span className="flex items-center space-x-2">
+                <Globe className="w-5 h-5" />
+                <span>Learn More</span>
+              </span>
+            </button>
+          </div>
+          <p className="text-sm text-gray-400 mt-6">
+            Applications are reviewed within 24-48 hours. Join thousands of successful promoters today!
+          </p>
+        </div>
+      </div>
+    </section>
 
 {/* Enhanced Supported Platforms Section */}
 <section className="py-32 bg-gradient-to-br from-gray-900 via-purple-900/5 to-gray-800 relative overflow-hidden">
@@ -659,38 +765,6 @@ const RootCubeLandingPage: React.FC = () => {
     </div>
   </div>
 </section>
-
-
-      {/* Tech Stack */}
-      <section id="tech-stack" className="py-32 bg-gradient-to-br from-gray-800 to-gray-900">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl font-bold text-center mb-20 text-gradient animate-on-scroll">
-            Built with Modern Tech
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="card-hover p-8 bg-white/5 rounded-3xl glass-effect border border-white/10 text-center animate-on-scroll">
-              <div className="text-5xl mb-6">⚡</div>
-              <h3 className="text-xl font-bold mb-3">Next.js Frontend</h3>
-              <p className="text-gray-400">TypeScript/TSX for robust, scalable user interfaces</p>
-            </div>
-            <div className="card-hover p-8 bg-white/5 rounded-3xl glass-effect border border-white/10 text-center animate-on-scroll">
-              <div className="text-5xl mb-6">🚀</div>
-              <h3 className="text-xl font-bold mb-3">Node.js API</h3>
-              <p className="text-gray-400">Express backend for fast, reliable performance</p>
-            </div>
-            <div className="card-hover p-8 bg-white/5 rounded-3xl glass-effect border border-white/10 text-center animate-on-scroll">
-              <div className="text-5xl mb-6">🗄️</div>
-              <h3 className="text-xl font-bold mb-3">MySQL Database</h3>
-              <p className="text-gray-400">Relational database for secure data management</p>
-            </div>
-            <div className="card-hover p-8 bg-white/5 rounded-3xl glass-effect border border-white/10 text-center animate-on-scroll">
-              <div className="text-5xl mb-6">🐳</div>
-              <h3 className="text-xl font-bold mb-3">Docker Deploy</h3>
-              <p className="text-gray-400">Containerized services for seamless scaling</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-32 gradient-bg relative overflow-hidden">
