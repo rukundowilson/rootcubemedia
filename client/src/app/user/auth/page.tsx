@@ -156,8 +156,9 @@ const PromoterBenefits = () => {
 
           {/* Footer Text */}
           <p className="text-sm text-gray-400 text-center">
-            Applications are reviewed within 24-48 hours. Join thousands of successful promoters today!
+            Join thousands of successful promoters today! rootCubeMedia
           </p>
+          <a href='#' className='text-blue-500 text-sm underline'>terms and policies</a>
         </div>
       </div>
     </section>
