@@ -22,17 +22,10 @@ const PromoterBenefits = () => {
   const [user, setUser] = useState<any>(null);
 
   const eligibilityRequirements = [
-    "Active social media presence (1K+ followers)",
-    "Demonstrated engagement with your audience", 
-    "Content creation experience",
-    "Professional communication skills",
-    "Commitment to brand guidelines"
+    "I'm a viewer, need to earn simple money",
+    "I'm a promoter, and l wanna get hired", 
+    "I'm an artist l need to promote my content",
   ];
-
-  const handleGoogleLogin = () => {
-    // Replace this with your real logic
-    console.log("Google login triggered");
-  };
 
   const handleFacebookLogin = () => {
     // Replace this with your real logic
@@ -52,24 +45,14 @@ const PromoterBenefits = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-        {/* Title */}
-        <div className="mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
-            Get Hired as a Promoter in a Snap
-          </h2>
-          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-            Join our elite network of promoters and unlock unlimited earning potential while building your personal brand
-          </p>
-        </div>
-
-        {/* Eligibility Requirements */}
-        <div className="bg-gradient-to-r from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/10 mb-12">
+        {/* path ways */}
+        <div className="bg-gradient-to-r from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-3xl p-8 md:p-12  mb-12">
           <div className="flex items-center justify-center mb-8">
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-gradient-to-r from-green-400 to-emerald-600 rounded-full">
                 <CheckCircle className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white">Eligibility Requirements</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-white">pathways</h3>
             </div>
           </div>
 
