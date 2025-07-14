@@ -4,21 +4,12 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { useState } from 'react';
 import { 
-  TrendingUp, 
-  DollarSign, 
-  Users, 
-  Star, 
-  Target, 
-  Award,
-  Zap,
-  Globe,
   CheckCircle,
   Facebook,
-  Github,
   ArrowLeft
 } from 'lucide-react';
 
-const PromoterBenefits = () => {
+const AuthComponent = () => {
   const [user, setUser] = useState<any>(null);
 
   const eligibilityRequirements = [
@@ -28,7 +19,6 @@ const PromoterBenefits = () => {
   ];
 
   const handleFacebookLogin = () => {
-    // Replace this with your real logic
     console.log("Facebook login triggered");
   };
 
@@ -37,13 +27,7 @@ const PromoterBenefits = () => {
   };
 
   return (
-    <section className="py-32 bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden min-h-screen">
-      {/* Background gradients */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/20 rounded-full filter blur-3xl"></div>
-      </div>
-
+    <section className="py-10  relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
         {/* path ways */}
         <div className="bg-gradient-to-r from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-3xl p-8 md:p-12  mb-12">
@@ -165,4 +149,4 @@ const PromoterBenefits = () => {
   );
 };
 
-export default PromoterBenefits;
+export default AuthComponent;

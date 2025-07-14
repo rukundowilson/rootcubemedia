@@ -200,7 +200,7 @@ const RootCubeLandingPage: React.FC = () => {
   <nav className="relative z-50 px-6 py-4">
     <div className="max-w-7xl mx-auto flex justify-between items-center">
       <div className="flex items-center space-x-3">
-        <span className="text-2xl font-bold text-white">mediabox</span>
+        <span className="text-2xl font-bold text-white">🙌mikonoJuu</span>
       </div>
       {/* Desktop Nav */}
       <div className="hidden md:flex space-x-8">
@@ -236,10 +236,18 @@ const RootCubeLandingPage: React.FC = () => {
         </button>
       </div>
       <div className="hidden md:flex space-x-4">
-        <button className="px-6 py-2 rounded-full border border-white/30 hover:bg-white/10 transition-all text-white">
+        <button
+        onClick={()=>{
+          window.location.href = "/user/auth/login"
+        }}
+        className="px-6 py-2 rounded-full border border-white/30 hover:bg-white/10 transition-all text-white">
           Login
         </button>
-        <button className="px-6 py-2 bg-amber-500 rounded-full hover:bg-amber-400 transition-all font-semibold text-black">
+        <button 
+        onClick={()=>{
+          window.location.href = "/user/auth/register"
+        }} 
+         className="px-6 py-2 bg-amber-500 rounded-full hover:bg-amber-400 transition-all font-semibold text-black">
           Get Started
         </button>
       </div>
@@ -304,7 +312,7 @@ const RootCubeLandingPage: React.FC = () => {
       {/* Call-to-Action Buttons */}
       <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mt-12 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <button className="px-10 py-4 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full text-lg font-bold hover:from-pink-400 hover:to-pink-500 transition-all transform hover:scale-105 text-white shadow-2xl hover:shadow-pink-500/25 min-w-[200px]">
-          🚀 Start Creating
+          🚀 promote video
         </button>
         <button className="px-10 py-4 bg-white/20 backdrop-blur-md rounded-full text-lg font-bold hover:bg-white/30 transition-all text-white border border-white/30 hover:border-white/50 shadow-2xl hover:shadow-white/10 min-w-[200px]">
           💰 Start Earning
@@ -353,7 +361,9 @@ const RootCubeLandingPage: React.FC = () => {
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-indigo-500 rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-all duration-500"></div>
               <div className="relative bg-gradient-to-br from-pink-500/10 to-indigo-500/10 p-8 rounded-3xl backdrop-blur-sm border border-white/10 hover:border-pink-500/50 transition-all duration-500 hover:scale-105 hover:rotate-1">
-                <div className="text-8xl mb-8 text-center filter drop-shadow-lg">🎨</div>
+                <div className="mb-8 filter drop-shadow-lg">
+                  <img src="public/" alt="artists promotions" />
+                </div>
                 <h3 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-pink-400 to-pink-300 bg-clip-text text-transparent">
                   Artists & Creators
                 </h3>
@@ -380,7 +390,9 @@ const RootCubeLandingPage: React.FC = () => {
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-pink-500 rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-all duration-500"></div>
               <div className="relative bg-gradient-to-br from-amber-500/10 to-pink-500/10 p-8 rounded-3xl backdrop-blur-sm border border-white/10 hover:border-amber-500/50 transition-all duration-500 hover:scale-105 hover:-rotate-1">
-                <div className="text-8xl mb-8 text-center filter drop-shadow-lg">📢</div>
+                <div className="mb-8 filter drop-shadow-lg">
+                  <img src="public/" alt="verified promoters" />
+                </div>
                 <h3 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-amber-400 to-amber-300 bg-clip-text text-transparent">
                   Verified Promoters
                 </h3>
@@ -407,7 +419,9 @@ const RootCubeLandingPage: React.FC = () => {
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-amber-500 rounded-3xl blur-xl opacity-25 group-hover:opacity-40 transition-all duration-500"></div>
               <div className="relative bg-gradient-to-br from-indigo-500/10 to-amber-500/10 p-8 rounded-3xl backdrop-blur-sm border border-white/10 hover:border-indigo-500/50 transition-all duration-500 hover:scale-105 hover:rotate-1">
-                <div className="text-8xl mb-8 text-center filter drop-shadow-lg">👀</div>
+                <div className="mb-8 filter drop-shadow-lg">
+                  <img src="public/" alt="viewers and earners" />
+                </div>
                 <h3 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">
                   Viewers & Earners
                 </h3>
@@ -608,9 +622,6 @@ const RootCubeLandingPage: React.FC = () => {
               </span>
             </button>
           </div>
-          <p className="text-sm text-gray-400 mt-6">
-            Applications are reviewed within 24-48 hours. Join thousands of successful promoters today!
-          </p>
         </div>
       </div>
     </section>
@@ -794,10 +805,7 @@ const RootCubeLandingPage: React.FC = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-indigo-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">R</span>
-                </div>
-                <span className="text-2xl font-bold">mediabox</span>
+                <span className="text-2xl font-bold">🙌mikonoJuu</span>
               </div>
               <p className="text-gray-400">
                 Connecting creators with audiences through authentic engagement and fair rewards.
@@ -831,7 +839,7 @@ const RootCubeLandingPage: React.FC = () => {
             </div>
           </div>
           <div className="border-t border-white/10 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 mediabox. All rights reserved.</p>
+            <p>&copy; 2025 🙌mikonoJuu. All rights reserved.</p>
           </div>
         </div>
       </footer>
