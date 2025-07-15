@@ -197,10 +197,10 @@ const RootCubeLandingPage: React.FC = () => {
     <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/60 via-purple-900/40 to-pink-900/60"></div>
   </div>
   {/* Navigation */}
-  <nav className="relative z-50 px-6 py-4">
+  <nav className="relative z-50 px-6 py-4 bg-gradient-to-br from-gray-800 to-gray-900">
     <div className="max-w-7xl mx-auto flex justify-between items-center">
       <div className="flex items-center space-x-3">
-        <span className="text-2xl font-bold text-white">🙌mikonoJuu</span>
+         <img src="/logo.png" className='max-w-40' alt="mikonojuu log" />
       </div>
       {/* Desktop Nav */}
       <div className="hidden md:flex space-x-8">
